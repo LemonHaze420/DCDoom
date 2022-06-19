@@ -1,0 +1,29 @@
+CDDevice ID = 1
+CD Player is empty...
+Platform is Windows 9X Version 4.10.1998
+Windows Info:  
+Resolution: 320 x 200
+Mode count : 32
+DirectDraw Video Mode List
+Mode Width x Height x Color Bits ModeX
+ 0     320     200         8      No
+ 4     320     240         8      No
+ 8     320     400         8      No
+12     512     384         8      No
+16     640     400         8      No
+20     640     480         8      No
+24     800     600         8      No
+28    1024     768         8      No
+DirectDraw Back Buffer Surface Description:
+Screen Width 320, Height 200, Surface Pitch 320
+windoom Version  1.11
+Game mode indeterminate.
+Error: No wad file in installation directory.
+
+Exiting windoom...
+I_ShutdownMusic...
+Running ShutdownDirectDraw...
+Restored display mode...
+Reset cooperative level...
+Shutdown DirectDraw Complete...
+Frames Per Second: 2
