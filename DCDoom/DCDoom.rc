@@ -1,0 +1,3 @@
+TEST_TONEBANK           RCDATA  MOVEABLE PURE   "gmi_v100.mpb"
+TEST_DRUMS              RCDATA  MOVEABLE PURE   "gmd_v100.mpb"
+LCD_PICTURE		        RCDATA  MOVEABLE PURE   "lcdpic.raw"

@@ -1,0 +1,55 @@
+Mitzi's Little Dragon (Dean Wiley) - WinDOOM Involvement History/Diary.
+Nov 26, 1998: Last update to this file.  Code/revision history at:
+	http://www.doomworld.com/doom4win
+d_console.c & d_console.h underscore removed for pkzip (8.3) compatiblity.
+
+10-9-98: First dl and eval.  Pretty good.  Sound file crash and no music.  Compiler="resource file not found" so made one with cheap a$$ icons.
+
+10-9-98/10-10-98: Sound file bug (chaingun v-linked to pistol) identified and fixed by plain copy of sound file 1 to sound file 86 at runtime.
+
+10-10-98: Midi conversion code enabled but bug:  the conversion routine is flawed.  Researching later... 10/10 (incidentally doomsday :) is my bday.
+
+10-12-98: Midi quest continues....  can't find original source of qmus2mid.  Found the source, wasn't helpful.  Exported a mid file using a wad editor and compared.  Worked out all the various (and considerable) bugs from qmus2mid code -- 4pm finally working.
+
+10-12 -> 10-13-98: Added/modified routine to draw credits,etc at 640x400 (double bitmap) so looks good at that res.  Stretched stuff looks good at up to 1024x768.
+
+10-13-98: Bug:  testing Doom][ ending... crashed zmalloc error 256K sought. 2:44am-this error was a doozey, really effectively corrupted the system.  Locked files and devices everywhere.  Fixing I_Error() so it shuts down better before bug fixing the ending.  Just couldn't find a bug in the way its handled... hrmmmm??  Oh well, tried again and crashed once more and ended ok twice... who knows.
+
+10-13-98: Double sized help screen and clean up coded.  (Was leaving junk >320 wide).
+
+10-13-98: removed all calls to V_DrawPatchDirect() since it just called V_DrawPatch().
+
+10-14-98: Double sized text in 640x400 & > modes.  Found a map bug > 320 with large text.  Leaves some screen junk - fixed the map junk by reducing text size in automap, looks best that way.
+
+10-14-98: Double sized finale text.  Looks good, but , & . need offset and screen needs wipe after text so animation is clean.  Another note is, need a DOUBLESTUFF var to quit testing with so many ifs (opt).
+
+10-14-98: Shareware showing help at Read This! menu.  Tougher fix than I thought. Got rid of the SKULL over help screens while I was at it.
+
+10-14-98: Double sized the bosspic at the end of Doom][ for high res.  Didn't want to waste/spend the time to beef up all the little anims tho.
+
+10-15-98: 1st coding of new feature - score.  Just ruffing the outline with the code here:
+	Do damage to something - get that much score.
+	Get an item (itemcount++) get a score point.
+	Take damage - lose that much score (even environmental thats the breaks).
+	% complete at intermission added to score as bonus (so even monster/monster kills count).
+	Cheat - lose all score.
+	** First draft/attempt will just write score to debug file **
+	** Eventually (hope) dump to another file (coded) so can be emailed or ftp'd for compare.
+	((10-15-98 ruff version working))
+
+10-17-98: Score working now
+	-keepscore
+	-showscore
+	There was more to figuring damage than I thought, but got it.
+	-keepscore : turns on scorekeeping and writes the score to the .dbg file at the end of each level.  I plan to make this do some 4th grade encrypting to a separate file so ppl can submit legit scores.
+	-showscore : puts the score in the HUD.  Its got a little lag because the HUD hang's its message for a few tics, but otherwise real good.  Turns on keepscore if not specified on command line (so you don't have to type both).
+	Did a good test of the program today, even with 'ETERNAL' wad.  Had to fix up some of the score stuff for the user wad but got it done.
+	Was lookin at the update to glDoom (wep page...) today.. that start screen is good!  I need one of those :)
+
+
+
+	
+
+
+
+

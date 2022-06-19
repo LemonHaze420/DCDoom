@@ -1,0 +1,730 @@
+WinDoom - V0.96
+
+14 Mar, 1998
+
+CONTENTS:
+
+i. foreword
+1. What is WinDoom?
+2. Program requirements
+3. Setting up WinDoom
+4. The console
+5. Changing your controls
+6. Using hi-res mode
+7. Playing a network game
+a. Acknowledgments
+
+---------------------------------------------------------------------
+
+i. Foreword - What's new with this version?
+
+1.  Fixed bug that kept left alt key from working.
+
+2.  Fixed "exit crash" bug.
+
+3.  Various memory leaks plugged.
+
+4.  Changed bind command to allow for key scancode entry.  This was
+    done solely to allow for foreign keyboard (or Dvorak) owners to
+    customize their controls.  You still can't change the weapons
+    keys nor can you change the console or menu keys.
+
+NOTE: I cannot stress enough that you MUST have DirectX 5 installed
+      and working on your machine for this program to work.  If you
+      don't have DirectX 5, IT WILL NOT WORK. And no amount of com-
+      plaining to me about it will change that.
+
+---------------------------------------------------------------------
+
+1. What is WinDoom?
+
+Thanks go first to id Software for making a great game then releasing
+the source code to it so we could have something else to play with.
+
+I have changed no gameplay at all.  You CAN use some new cheat codes
+in the console but about all you can do now is get the backpack you
+couldn't get by cheating before.
+
+WinDoom is my version (so far) of a Win32 port of the Linux Doom
+source code released by id Software.  I have gotten most of the
+features of the original program working but it isn't quite finished
+yet.  It does odd things occasionally.
+
+Please DO E-Mail me with problems you've had with this especially if
+you can't get it working at all. I already know of most of the
+problems you may encounter and I am already addressing them.  But I
+want feedback about any problems you encounter.  There is a file
+generated in your game directory called windoom.dbg.  It contains
+some data that will probably be helpful to me in debugging whatever
+problem you've encountered. Screenshots may be helpful, too.
+
+I have several very different systems to test this on and a LAN as
+well but I couldn't possibly duplicate the variety of systems you
+all have. Running it on your systems is the best testing I can get.
+
+I know this is more like a public Beta test but I did want to share
+what I have done so far, though.
+
+Also, please don't send me E-Mails asking for features or changes.
+There will be time enough for that after the game actually works
+properly. Please don't ask me to fix bugs in the original game. I'm
+just trying to make sure that changes I've made haven't introduced
+new bugs.
+
+New revisions will be forthcoming soon.
+
+Also, when I've got all the original Doom features working and the
+program stabilized, I will release my source code for the program.
+
+To anyone working on their own Win32 ports of Doom: If you want to
+share programming information then all you have to do is ask. I'll
+tell you whatever I know if it will help.  I AM going to release my
+modified source code when I get this stabilized.
+
+A few new things have been added along the way.
+
+1. A print screen key is now always available by pressing
+   the (Print Screen/Sys Rq) key on your keyboard.  If you
+   aren't playing a game, no message will appear on the
+   screen but a print screen PCX file WILL be generated.
+
+2. I have added a console similar to the Quake/Quake II
+   console.  It isn't as fancy and no doubt not as functional
+   as the Quake console but it works and any keyboard command
+   such as the cheats can be entered in the console.  Also,
+   all messages that appear on the screen briefly will be
+   displayed in the console.  The console key is the "`"
+   key.
+
+3. As you see above, a CD player is now supported.  A number
+   of features are planned for this (playlists, directory,
+   naming, song naming, etc.)  Trying to play a CD with no
+   CD in the drive will do nothing.  Removing the CD from the
+   drive while playing will result in the MIDI song being
+   restarted.  The CD player will detect if the CD has been
+   changed and start playing on the first music track (if
+   there is one) and will not play if there are no music
+   tracks.
+
+4. Midi file playing. Currently a single MIDI file will be played
+   (if it exists) in the game directory. The name of this file is
+   doomsong.mid.  It can be any valid MIDI file.  It will be played
+   ALL the time unless you turn on the CD player.
+
+5. There is now an "always_run" key. I got this idea from Chi
+   Hoang and his DOSDoom. The always_run key is the <CAPS LOCK>
+   key and it toggles between on and off.
+
+6. There is an "mvert" setting and an "mvert" key to toggle it on
+   and off.  It is persistent (gets saved and restored).
+
+7. Keyboard bindings have been added.
+
+8. Mouse and joystick bindings have been added.
+
+9. The system uses keyboard scancodes exclusively for system
+   controls.  All other values in windoom.ini are true=1 and
+   false=0.  true=on, false=off
+
+10.The ability to record, stop and play back demo from the console.
+   This is currently not working properly.  You can try it but it
+   probably won't work right.
+
+---------------------------------------------------------------------
+
+2. Program Requirements
+
+This program is a Win32 application and REQUIRES DirectX 5
+(available for NT).  It would not have been possible to do
+what was done with DirectX 3.  DirectX 5 will be supported in
+the 5.0 version of NT. If you have Windows95 and you don't have
+DirectX 5, you can get it here:
+
+http://www.microsoft.com/msdownload/directx5/directx5.htm
+
+If you have NT 4.0 and want DirectX 5 you'll have to look around
+for it.  It's there but I don't know a stable place you can
+download it from.
+
+If you want to run ANYTHING under Windows95 you really should
+have at least 16 Meg of RAM.  32 Meg is MUCH better. NT better
+have 32 to start with.
+
+You must have a functioning TCP/IP connection to play a
+network game using this program.  Internet play is not stable
+at all and not recommended.
+
+You CAN play with just the keyboard but both the mouse and
+a joystick (or other game controller) are supported.
+
+There is a way for people who use NT 4 to run this program.
+There is a version of DirectX 5 for NT 5 floating around the
+Internet.  I found it at www.op3dfx.com on the 15 Jan, 1998
+news page. It appears to be the DirectX 5 from the NT 5 beta.
+I don't know that this is supposed to be distributed but I
+downloaded it and installed it on my NT 4.0 Server and it
+works.
+
+As far as I can tell, no resolutions below 640x480 are supported
+by the DirectX 5 for NT drivers.
+
+
+---------------------------------------------------------------------
+
+3. Setting up WinDoom
+
+Create a directory and put the WinDoom.exe program in it
+along with the Doom IWAD of your choice  (I've tested this
+with all three of the Doom I wads (doom1.wad, doom.wad and
+doomu.wad) as well as doom2.wad, tnt.wad and plutonia.wad.
+
+The order of precedence in looking for an IWAD is this:
+
+doom2.wad    - retail Doom II wad file
+plutonia.wad - Another Doom II IWAD from id
+tnt.wad      - Another Doom II IWAD from id
+doomu.wad    - ultimate Doom I retail wad file
+doom.wad     - Doom I registered shareware wad
+doom1.wad    - Doom I unregistered shareware wad
+
+When the program is first run, it will create a section in
+the win.ini file for WINDOOM that stores the location of
+the WinDoom program.  If you move the program or change the
+name of the directory in which the program is installed you
+need to update this ini file entry or remove it.
+
+An ini file will be created (or updated) in the directory
+in which WinDoom is run with the configuration information
+for the program. Modifying this file is currently the only way
+to change some of the mouse/joystick mappings.
+
+A way to change your keyboard mappings and the values for your
+mouse and joystick has been added to the console in the program.
+
+Make sure your shortcut, if you create one, has the directory
+where you installed the program as the working directory.  It
+probably won't run otherwise.
+
+I have not tried some of the original command line options to see
+if they work or not.  I have spent most of my time writing code
+to get the program working.  I will be testing the rest of these soon.
+
+I have tested the following and know that they work:
+
+-nomonsters
+-deathmatch
+-altdeath
+-net
+-skill
+-warp
+-episode
+-playdemo
+-timedemo
+-record
+-file
+-width
+-height
+
+For information on how to use the options other than -net, -width
+and -height please see the official Doom FAQ.
+
+I don't know of any others that are normally usable.
+
+
+----------------------------------------------------------------
+
+4. The console
+
+This program does not currently support the original music from 
+the game. It is stored in a format called "MUS" and is not
+directly playable by the MCI midi sequencer in Windows.
+
+In order to still have music in the game, I wrote some routines
+to access and control the cd player that is found in most pc's
+today.
+
+I made a vain attempt to map the cd controls into unused keys
+in the Doom keyboard but no combination I could think of made
+any sense.  So I created a console where cd commands could be
+entered.
+
+While I was testing the code for controlling the cd player from
+the console, I remembered what an absolute pain it was to try 
+to enter cheat codes without being able to tell if the keys
+were entered properly.  I decided to allow cheat code entry
+into the console as well so I could see what I was typing.
+
+I then decided to add NEW cheat codes that were similar to
+the ones I had gotten used to in Quake and Quake II. It sort
+of ballooned from there...
+
+The console command key is "`".  This key both opens and closes
+the console.  The menu command key <ESC> also closes the console
+and starts the menu.  If the menu is up when you press the console
+command key, the menu will close and the console will open.
+
+Here is a list of the commands you can now enter on the command
+line of the console:
+
+   iddqd          - god mode
+   idfa           - full ammo
+   idkfa          - keys full ammo
+   idclev         - change level
+   idchoppers     - chainsaw and invulnerability
+   idclip         - no clipping toggle
+   idspispopd     - no clipping toggle
+   idbeholdi      - invisibility
+   idbeholdv      - invulnerability
+   idbeholds      - strength (berserk pack)
+   idbeholdr      - radiation/environment suit
+   idbeholdl      - light amplification goggles
+   idbeholda      - all map cheat
+   cd on          - starts your cd player (switches from midi)
+   cd off         - stops your cd player (switches to midi)
+   cd pause       - pause/resume cd music toggle
+   cd resume      - pause/resume cd music toggle
+   cd next        - play next song on cd
+   cd +           - play next song on cd
+   cd prev        - play previous song on cd
+   cd -           - play previous song on cd
+   cd XX          - plays song number specified in XX 00 to 99
+   midi pause     - pauses/resumes the midi playback (toggle)
+   midi resume    - pauses/resumes the midi playback (toggle)
+   quit           - quits the game (immediately)
+   god            - enable god mode (degreelessness?) toggle
+   map            - e?m? or map?? (Doom I or Doom II map names)
+   noclip         - no clipping toggle
+   give all       - gives full ammo,armor,health,weapons,keys
+   give ammo      - gives full ammo
+   give armor     - gives full armor
+   give health    - give 100% health
+   give weapons   - gives all weapons
+   give keys      - gives all keys
+   give backpack  - gives ammo backpack
+   always_run X   - toggles always run 0 = off, 1 = on
+   swap_stereo X  - toggles swap left/right 0 = off, 1 = on
+   bind           - binds a value to a cvar
+   record         - records a demo in new demo II format
+   finish         - stops recording a demo II format demo
+   play           - plays back a demo II format demo
+   cmdlist        - lists console commands
+
+   The map and idclev commands are disabled from the console
+   during a network game. It crashes the machine you do it
+   on and locks up the KEY player's machine.  The other players
+   can exit the game but their systems are VERY slow. (You
+   have to hold the keys longer.)
+
+   All the original cheat codes work EXACTLY as they did
+   originally.  No changes have been made to those. The
+   new MAP command works similarly to the MAP command in
+   Quake/QuakeII. If you want to select a Doom 1 or Doom
+   II level you type in MAP then the full name of the
+   map you want to load (E1M7 or MAP19).
+
+   All the cheats are disabled during network games, also.
+   Note: This does not include the game control commands,
+   just the "cheats".
+
+   A number of other commands are planned for this. Mostly
+   just game variables that you can set. (like always_run)
+
+   All game input is dead while the console is active, so
+   be warned! The <ESCAPE> key as well as the "`" key will
+   terminate the console.  Any command that you have not
+   pressed <ENTER> to complete will be thrown away.  The
+   menu and console shut each other down when you call
+   them up.  They are mutually exclusive.
+
+
+----------------------------------------------------------------
+
+5. Changing your controls
+
+
+With the "bind" command on the console, you can now change
+your keyboard mappings from the console.  Additional mappings
+and controls will be added later.
+
+The bind command works backwards from the Quake bind command.
+You enter the bind command, the cvar you want a keystroke bound
+to followed by the key or the keyname.
+
+Some keys are not printable and so are accessed through their
+keyname.  Other keys are printable and accessed directly by
+entering the actual key.
+
+The following are the keyboard control cvars that have been
+implemented so far:
+
+key_right       - the key to turn right - also used in menu
+key_left        - the key to turn left - also used in menu
+key_up          - the key to move forward - also used in menu
+key_down        - the key to move backward - also used in menu
+key_strafeleft  - key used to slide to the left
+key_straferight - key used to slide to the right
+key_fire        - key used to fire weapons
+key_use         - key used to open doors and flip switches
+key_strafe      - toggle key used to change turn to strafe
+key_speed       - key used to go faster (straight or turning)
+joyb1           - joystick button 1
+joyb2           - joystick button 2
+joyb3           - joystick button 3
+joyb4           - joystick button 4
+mouseb1         - left mouse button
+mouseb2         - right mouse button
+mouseb3         - middle mouse button
+
+These cvars can be set to any printable character or they
+can be set to any of the following key names:
+
+NULL        - do nothing
+BACK        - back-space
+ENTER       - normal enter key (may not function properly)
+LCTRL       - left control key
+LSHIFT      - left shift key
+RSHIFT      - right shift key
+LALT        - left alt key
+SPACE       - space bar
+CAPS        - caps lock key
+NUMLOCK     - numlock lock key
+SCROLL      - scroll lock key
+PAD7        - 7/home key on keypad
+PAD8        - 8/up arrow on keypad
+PAD9        - 9/page up on keypad
+PAD-        - the "-" key on keypad
+PAD4        - 4/left arrow on keypad
+PAD5        - 5 key on keypad
+PAD6        - 6/right arrow on keypad
+PAD+        - the "+" key on keypad
+PAD1        - 1/end key on keypad
+PAD2        - 2/down arrow on keypad
+PAD3        - 3/page down on keypad
+PAD0        - 0/insert on keypad
+PAD.        - ./delete on keypad
+PADENTER    - enter key on keypad
+RCTRL       - right control key
+PAD/        - the "/" key on keypad
+RALT        - right alt key
+HOME        - home key (grey)
+UP          - up key (grey)
+PAGEUP      - page up (grey)
+LEFT        - left arrow (grey)
+RIGHT       - right arrow (grey)
+END         - end key (grey)
+DOWN        - down key (grey)
+PAGEDOWN    - page down (grey)
+INSERT      - insert key (grey)
+DELETE      - delete key (grey)
+
+The bind command currently works backward from the bind command
+in Quake.  The Quake bind command binds commands to keys.  This
+bind command binds keys to commands.  A subtle but important
+difference. (and one that may change)
+
+Doom was designed with only a few customizable commands. The
+rest are set and unchangable.  Quake was designed with a very
+different idea about how the controls should work.
+
+Doom may, at a later date, be converted to use the type of
+command control that Quake uses.  For now I have stayed with
+the original command implementation.
+
+The commands in Doom are referred to as cvars.
+
+The bind command syntax works like this:
+
+BIND KEY_USE SPACE
+
+Which will bind the space bar to the use cvar. You will get a
+message if the bind command is successful telling you that the
+cvar is bound to the key you specified like this:
+
+CMD KEY_USE BOUND TO SCANCODE 57
+
+In this case the space bar has a keyboard scan code of 57.
+
+If the keyboard command you are trying to bind to a command
+cvar does not exist, you will get this error message:
+
+BIND ERROR: INVALID KEY VALUE
+
+If the keyboard command cvar you are trying to bind does
+not exist, you will get this error message:
+
+BIND ERROR: INVALID CVAR
+
+There is also another type of command you can issue at the
+console which is not listed above because it is used to
+set the value of some game control cvars.
+
+Control cvars are not the same as command cvars.  Command
+cvars are used to generate program input.  Control cvars
+are used to control the way the program behaves.
+
+The currently defined control cvars are:
+
+always_run     - you always run in the game
+swap_stereo    - reverses stereo sound "panning"
+usemouse       - is mouse input available
+mousebfire     - which mouse button is used to "fire"
+mousebstrafe   - which mouse button toggles "strafe"
+mousebforward  - which mouse button moves you forward
+usejoystick    - is joystick input available
+joybfire       - which joystick button is used to "fire"
+joybstrafe     - which joystick button toggles "strafe"
+joybuse        - which joystick button opens doors/flips switches
+joybspeed      - which joystick button makes you run
+mvert          - 0 = mouse normal, 1 = mouse left/right only
+
+The syntax for using these controls is simple. You enter the
+name of the cvar and the value you wish to assign to it like
+this:
+
+always_run 0
+
+If the cvar is valid and the value is within the acceptable
+limits, you will get a message like this:
+
+always_run SET TO 0
+
+If you enter an invalid cvar name, you will get this error
+message:
+
+ERROR: INVALID CVAR
+
+If you enter a valid cvar name but enter an invalid value for
+it, you will get this error message:
+
+ERROR: INVALID VALUE
+
+The usemouse and usejoystick cvars tell the program whether
+you want to use mouse and/or joystick input if either or both
+are available.
+
+The value of 0 for either of these turns off the support for
+that device.  A value of 1 turns it back on.
+
+The button numbers for the mouse and joystick start at 0 rather
+than 1. So a two button mouse has buttons 0 and 1. The left and
+right mouse buttons respectively. A joystick with two buttons
+also has buttons 0 and 1.  Which button is which usually depends
+on the joystick but the trigger is usually button 0 while the
+the other buttons are numbered starting at 1.  Some experimen-
+tation may be required before you get the buttons to work the
+way you expect them to.
+
+Remember that usemouse must be set to 1 to be able to use a
+mouse and usejoystick must be set to 1 to be able to use a
+joystick with the program.
+
+The functions defined in the cvars list are ALL the functions
+that could ever be assigned to mouse and joystick controls in
+Doom.  No other functions have ever been possible.
+
+The changes you make to your controls with this are immediate
+and persistent. (meaning that they are saved in the windoom.ini
+file and are used the next time you start the WinDoom)
+
+
+----------------------------------------------------------------
+
+6. Using hi-res mode
+
+
+Part of the reason for porting this code to Win32 was to be
+able to use high resolution video modes.
+
+This program supports all video 8 bit (256) color modes that are
+available with the DirectDraw drivers on your computer.  Some are
+not recommended.  Do NOT try to use video modes where the height
+value is greater than the width value. (i.e. 320x400)  You will
+NOT be happy with the result and the program will probably die.
+
+In order to know what video modes are available to you, you can
+look in the DirectX applet in your control panel or you can run
+the program once and look at the contents of the windoom.dbg
+file created in the directory where you installed the program.
+
+Once you have run WinDoom a video mode list will be written to
+the windoom.dbg file.  You can pick a mode from this list as
+long as the height does not exceed the width and the color bits
+value is 8.
+
+I have had some machines not give a picture when running in some
+of the high resolution modes even though the program was running.
+I could press escape, down, enter and "y" to exit the program
+but I never saw any output from the game.  I don't know what
+causes this.  I am investigating it.  If you have this problem
+please notify me and tell me what video setup you have.
+
+The syntax for high the resolution modes is:
+
+-width xxxx -height yyy
+
+where the xxxx is the width you want to use (like 320) and the
+yyy is the height you want to use (like 240).  So to start
+WinDoom and run the program at 640x480 resolution, you would
+put the following parameters on the command line of your WinDoom
+shortcut:
+
+-width 640 -height 480
+
+You can access the command line for your shortcut by right
+clicking the mouse on the shortcut then selecting the properties
+option then clicking on the properties tab in the dialog box.
+
+
+DISCLAIMER
+
+I make absolutely NO warrantees of any kind for this
+program.  I am not responsible for any consequences
+of anyone using this program.
+
+id Software owns the rights to Doom and to the source
+code they distributed.  This program was compiled from
+source code to that game that was modified by me. So
+don't bug id Software if you've got a problem with
+this program.  I'm the one who screwed up. Tell me.
+
+
+---------------------------------------------------------------------
+
+7. Playing a network game
+
+Okay, this is little different than a DOS Doom network game.
+It's just like the Linux parameters, though.
+
+What you want to do is create a shortcut to your game and
+then change the parameters of your shortcut to include the
+network commands on the command line.
+
+The parameter to start a network game is "-net" (without the
+quotes).  You then follow the -net command with the player
+number your machine is going to be (1 to 4) and the IP
+addresses or hostnames of the OTHER systems you will be
+playing with. The IP addresses MUST be preceded by a period
+".". If you leave off the leading period, the game will
+think that the IP address is a hostname and try to resolve
+it into an IP address (and die on you).
+
+Sample command lines for two players would look like this:
+
+machine 1: (hostname: rimmer IP address: 192.168.1.5)
+windoom -net 1 holly -deathmatch -nomonsters
+OR
+windoom -net 1 .192.168.1.4 -deathmatch -nomonsters
+
+machine 2: (hostname: holly IP address: 192.168.1.4)
+windoom -net 2 rimmer -deathmatch -nomonsters
+OR
+windoom -net 2 .192.168.1.5 -deathmatch -nomonsters
+
+In order to use hostnames rather than IP addresses you
+must either have DNS setup or have a valid hosts file.
+
+If you add a third or fourth machine to the game you need
+to add the IP addresses of the OTHER machines to the
+command line on each machine. You do not put your own
+machine's IP address on the command line.  You also
+do not put how many machines are in the game after the
+-net command.  Only which player, out of the 4, you are.
+
+The player numbers must be contiguous.  You can't have
+players 1,2 and 4.  Also, one player MUST be player 1.
+Player 1 is the KEY player and that machine coordinates
+all the other systems.
+
+The number of players in the game is determined by how
+many IP addresses you put on the command line plus your
+machine.
+
+The command line on the KEY player's machine in a four
+player game might look like this:
+
+windoom -net 1 .192.168.1.3 .192.168.1.4 .192.168.1.5 -deathmatch -nomonsters
+OR
+windoom -net 1 cat holly rimmer -deathmatch -nomonsters
+
+The other player's command lines in the same game might
+look like this:
+
+windoom -net 2 lister holly rimmer -deathmatch -nomonsters
+OR
+windoom -net 2 .192.168.1.2 .192.168.1.4 .192.168.1.5 -deathmatch -nomonsters
+
+windoom -net 3 lister cat rimmer -deathmatch -nomonsters
+OR
+windoom -net 3 .192.168.1.2 .192.168.1.3 .192.168.1.5 -deathmatch -nomonsters
+
+windoom -net 4 lister cat holly -deathmatch -nomonsters
+OR
+windoom -net 4 .192.168.1.2 .192.168.1.3 .192.168.1.4 -deathmatch -nomonsters
+
+If you start a network game and the program appears to be
+"hung" (black screen only), press and hold the escape
+key for a few seconds.  The program will terminate. It
+generates an error when shutting down but it doesn't
+affect game play.  I should have that error figured out
+soon.
+
+I DO NOT know if the UDP datagrams used are robust enough
+to allow this to be played over the internet.  My assumption
+is that it would be but I don't know. I haven't tried it.
+
+I have started up a four player game on my network and
+played at all four stations. Response was good and play
+appeared to be smooth.
+
+I'd be interested to know if anyone is able to play this
+over the Internet with all the problems that entails. I can't
+because of my router.
+
+---------------------------------------------------------------------
+
+a. Acknowledgements
+
+Thanks to all of you who have downloaded the program (I'm not
+calling it a game. The game part comes from id!).  Your feedback
+has been very helpful and has made this a better program.
+
+And to those of you who have had problems.  I thank you for
+your patience while I worked out the bugs you've reported.
+
+Thanks again to id Software for making Doom.
+
+Thanks to Chi Hoang, Andy Bay, and Bernd Kreimeier for the
+programming ideas.
+
+Thanks to the other members of Project Doom for their support
+and interest.
+
+Thanks to John Carmack, John Cash, Michael Abrash, Brian Hook
+for letting me peek over your shoulder (figuratively speaking)
+occasionally.  It's been very instructive.
+
+
+Microsoft(tm)(c) 1975-1998, Microsoft, Inc., All Rights Reserved.
+Quake(R)(c) 1996, id Software, Inc. All Rights Reserved.
+Quake II(R)(c)1997, id Software, Inc. All Rights Reserved.
+DOOM(R)(c) 1993, id Software, Inc. All Rights Reserved.
+DOOM(R) and the DOOM image are registered trademarks of
+id Software, Inc.
+
+---------------------------------------------------------------------
+
+WARNINGS!
+
+This program is by no means ready for prime time but it does work
+mostly.  The original music was a large part of Doom for some of
+us and this game isn't complete without it. It IS being worked on.
+It may not be possible, however, to play against other versions of
+Doom with this code.  I DO have the specifications for the IPX
+protocol used by the original Doom and I will attempt to make that
+work as well.
+
+Supporting DOS Doom in network games is, therefore, doubtful but
+it may happen.  However if Chi and I can maintain the same message
+data for the networking, you should be able to play network games
+between the two.
+
